@@ -1,0 +1,10 @@
+cluster: https://kubernetes.default.svc
+project: default
+acme:
+  email: kulmam92@gmail.com
+cert-manager:
+  enabled: true
+  installCRDs: true
+  controller:
+    nodeSelector:
+        beta.kubernetes.io/os: "linux"

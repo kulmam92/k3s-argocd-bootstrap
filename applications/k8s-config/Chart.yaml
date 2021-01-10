@@ -1,0 +1,6 @@
+apiVersion: v2
+name: k8s-config-app
+description: k8s cluster configuration
+type: application
+version: 0.1.0
+appVersion: 1.0

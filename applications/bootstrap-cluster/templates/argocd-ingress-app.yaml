@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    server: {{ .Values.cluster }}
+  project: {{ .Values.project }}
+  source:
+    repoURL: https://github.com/kulmam92/k3s-argocd-bootstrap.git
+    targetRevision: HEAD
+    path: applications/argocd-ingress
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    validate: true

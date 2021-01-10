@@ -1,0 +1,122 @@
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+cluster: https://kubernetes.default.svc
+project: default
+kube-prometheus-stack:
+  enabled: true
+  # Forcing Kubelet metrics scraping on http
+  kubelet:
+    enabled: true
+    serviceMonitor:
+      https: false
+  # Disabling scraping of Master Nodes Components
+  # kubeControllerManager:
+  #   enabled: false
+  # kubeScheduler:
+  #   enabled: false
+  # kubeEtcd:
+  #   enabled: false
+  # kubeProxy:
+  #   enabled: false
+  alertmanager:
+    enabled: true
+    ingress:
+      enabled: true
+      # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+      # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+      # ingressClassName: nginx
+      # ingressClassName: nginx
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      ## Hostnames.
+      ## Must be provided if Ingress is enable.
+      hosts:
+        - alertmanager.172.18.0.3.xip.io
+        - alertmanager.172.18.0.4.xip.io
+      ## Path for grafana ingress
+      path: /
+      ## TLS configuration for Alertmanager Ingress
+      ## Secret must be manually created in the namespace
+      ##
+      # tls: []
+      # - secretName: alertmanager-general-tls
+      #   hosts:
+      #   - alertmanager.172.18.0.3.xip.io
+  grafana:
+    enabled: true
+    ingress:
+      enabled: true
+      # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+      # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+      # ingressClassName: nginx
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      ## Hostnames.
+      ## Must be provided if Ingress is enable.
+      hosts:
+        - grafana.172.18.0.3.xip.io
+        - grafana.172.18.0.4.xip.io
+      ## Path for grafana ingress
+      path: /
+      ## TLS configuration for grafana Ingress
+      ## Secret must be manually created in the namespace
+      ##
+      # tls: []
+      # - secretName: grafana-general-tls
+      #   hosts:
+      #   - grafana.172.18.0.3.xip.io
+    plugins:
+    - grafana-piechart-panel
+  prometheusOperator:
+    # https://github.com/prometheus-community/helm-charts/issues/418
+    tls:
+      enabled: false
+    admissionWebhooks:
+      enabled: false
+  prometheus:
+    enabled: true
+    ingress:
+      enabled: true
+      # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+      # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+      # ingressClassName: nginx
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      ## Hostnames.
+      ## Must be provided if Ingress is enable.
+      hosts:
+        - prometheus.172.18.0.3.xip.io
+        - prometheus.172.18.0.4.xip.io
+      ## Path for grafana ingress
+      path: /
+      ## TLS configuration for Prometheus Ingress
+      ## Secret must be manually created in the namespace
+      ##
+      # tls: []
+      # - secretName: prometheus-general-tls
+      #   hosts:
+      #   - prometheus.172.18.0.3.xip.io
+    # thanosIngress:
+    #   enabled: true
+    #   # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+    #   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+    #   # ingressClassName: nginx
+    #   annotations:
+    #     kubernetes.io/ingress.class: nginx
+    #     # kubernetes.io/tls-acme: "true"
+    #   ## Hostnames.
+    #   ## Must be provided if Ingress is enable.
+    #   hosts:
+    #     - thanos-gateway.172.18.0.3.xip.io
+    #     - thanos-gateway.172.18.0.4.xip.io
+    #   ## Path for grafana ingress
+    #   path: /
+    #   ## TLS configuration for Prometheus Ingress
+    #   ## Secret must be manually created in the namespace
+    #   ##
+    #   # tls: []
+    #   # - secretName: prometheus-general-tls
+    #   #   hosts:
+    #   #   - prometheus.172.18.0.3.xip.io

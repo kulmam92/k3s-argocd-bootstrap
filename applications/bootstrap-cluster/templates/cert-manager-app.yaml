@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cert-manager
+    server: {{ .Values.cluster }}
+  project: {{ .Values.project }}
+  source:
+    repoURL: https://github.com/kulmam92/k3s-argocd-bootstrap.git
+    targetRevision: HEAD
+    path: applications/cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    validate: true

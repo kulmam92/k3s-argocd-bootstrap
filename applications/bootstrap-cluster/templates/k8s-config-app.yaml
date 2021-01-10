@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8s-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    server: {{ .Values.cluster }}
+  project: {{ .Values.project }}
+  source:
+    repoURL: https://github.com/kulmam92/k3s-argocd-bootstrap.git
+    targetRevision: HEAD
+    path: applications/k8s-config
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    validate: true

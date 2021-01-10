@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ingress-nginx
+    server: {{ .Values.cluster }}
+  project: {{ .Values.project }}
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 3.16.1
+    chart: ingress-nginx
+    helm:
+      parameters:
+      - name:  controller.replicaCount
+        value: "2"
+      - name:  "controller.nodeSelector.beta\\.kubernetes\\.io/os"
+        value: "linux"
+      - name:  "defaultBackend.nodeSelector.beta\\.kubernetes\\.io/os"
+        value: "linux"
+      valueFiles:
+      - values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    validate: true

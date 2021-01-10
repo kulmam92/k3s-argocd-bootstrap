@@ -1,0 +1,6 @@
+apiVersion: v2
+name: bootstrap-cluster
+description: A Helm chart for Kubernetes bootstapping
+type: application
+version: 0.1.1
+appVersion: 1.0
