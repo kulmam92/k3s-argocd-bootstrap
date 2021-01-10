@@ -74,6 +74,7 @@ Open web browser and type <argocd ingress address>/argo-cd
 
 ### Prometheus
 1. Check Ingress
+
 I registered 172.18.0.3 and 172.18.0.4 since external IP of metallb is one of them most of the time.
 ```
 ❯ kubectl -n monitoring get ingress
