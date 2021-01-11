@@ -48,7 +48,7 @@ Run one more time if it fails with the below error.
 ```
 make argocd-bootstrap
 ```
-The kustomize script for ArgoCD and folder structure is form [Bootstrap a kubernetes cluster with ArgoCD and Istio](https://nemo83.dev/posts/argocd-istio-operator-bootstrap/).
+The kustomize script for ArgoCD and folder structure is from [Bootstrap a kubernetes cluster with ArgoCD and Istio](https://nemo83.dev/posts/argocd-istio-operator-bootstrap/).
 
 5. Monitor using K9S
 ```
