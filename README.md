@@ -4,7 +4,7 @@ Inspired by the postings in the references section.
 
 ## Prerequisites
 * [K3D](https://k3d.io/): k3d is a lightweight wrapper to run k3s (Rancher Lab’s minimal Kubernetes distribution) in docker.
-* [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/): The kubectl command line tool lets you control Kubernetes clusters. 
+* [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/): The kubectl command line tool lets you control Kubernetes clusters.
 * [kustomize](https://kustomize.io/): Kustomize introduces a template-free way to customize application configuration that simplifies the use of off-the-shelf applications.
 * K9S CLI(https://k9scli.io/): K9s is a terminal based UI to interact with your Kubernetes clusters.
 * [xip.io](http://xip.io/): xip.io is a magic domain name that provides wildcard DNS.
@@ -40,13 +40,16 @@ Mac only
 ```
 make configure-tuntap
 ```
-4. argocd-bootstrap
+The script is from [K3s with k3d and MetalLB](https://blog.kubernauts.io/k3s-with-k3d-and-metallb-on-mac-923a3255c36e). Refer to this article for more details.
 
+4. argocd-bootstrap
 Run one more time if it fails with the below error.
 > error: unable to recognize "STDIN": no matches for kind "Application" in version "argoproj.io/v1alpha1"
 ```
 make argocd-bootstrap
 ```
+The kustomize script for ArgoCD and folder structure is form [Bootstrap a kubernetes cluster with ArgoCD and Istio](https://nemo83.dev/posts/argocd-istio-operator-bootstrap/).
+
 5. Monitor using K9S
 ```
 k9s
