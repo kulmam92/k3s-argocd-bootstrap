@@ -1,13 +1,13 @@
 # k3s-argocd-bootstrap
-bootstrapping K3S/K8S using ArgoCD
+Bootstrapping K3S/K8S using ArgoCD.
 Inspired by the postings in the references section.
 
 ## Prerequisites
 * [K3D](https://k3d.io/): k3d is a lightweight wrapper to run k3s (Rancher Lab’s minimal Kubernetes distribution) in docker.
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/): The kubectl command line tool lets you control Kubernetes clusters.
 * [kustomize](https://kustomize.io/): Kustomize introduces a template-free way to customize application configuration that simplifies the use of off-the-shelf applications.
-* K9S CLI(https://k9scli.io/): K9s is a terminal based UI to interact with your Kubernetes clusters.
-* [xip.io](http://xip.io/): xip.io is a magic domain name that provides wildcard DNS.
+* [K9S CLI](https://k9scli.io/): K9s is a terminal based UI to interact with your Kubernetes clusters.
+* [xip.io](http://xip.io/): xip.io is a magic domain name that provides wildcard DNS. You don't need to install anything for this.
 
 ## Follow
 ```
@@ -78,7 +78,7 @@ Open web browser and type <argocd ingress address>/argo-cd
 ### Prometheus
 1. Check Ingress
 
-I registered 172.18.0.3 and 172.18.0.4 since external IP of metallb is one of them most of the time.
+I registered both 172.18.0.3 and 172.18.0.4 since external IP of ingress-nginx-controller is one of them most of the time.
 ```
 ❯ kubectl -n monitoring get ingress
 
